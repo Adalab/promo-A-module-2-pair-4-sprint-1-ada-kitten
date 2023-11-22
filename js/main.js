@@ -24,7 +24,11 @@ btnAdd.addEventListener("click", (event) => {
     valuePhoto +
     ' alt="siames-cat"/> <h3 class="card_title"> ' +
     valueName +
-    ' </h3> accordion <h4 class="card_race">valueBreed</h4> <p class="card_description">valueDesc </p> </article> </li>';
+    ' </h3> accordion <h4 class="card_race">' + 
+    valueBreed + 
+    ' </h4> <p class="card_description"> ' + 
+    valueDesc + 
+    '</p> </article> </li>';
   const list = document.querySelector(".js-list");
   list.innerHTML = list.innerHTML + newCat;
 });
