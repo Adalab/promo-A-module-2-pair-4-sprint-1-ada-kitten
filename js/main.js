@@ -64,12 +64,28 @@ list.innerHTML = kitten1 + kitten2 + kitten3;
 
 // Eventos
 
-addButton.addEventListener("click", (event) => {
-  formSection.classList.toggle("collapsed");
-});
+function showNewCatForm() {
+  formSection.classList.remove("collapsed");
+}
+function hideNewCatForm() {
+  formSection.classList.add("collapsed");
+}
+function handleClickNewCatForm(event) {
+  event.preventDefault();
+  if (formSection.classList.contains("collapsed")) {
+    showNewCatForm();
+  } else {
+    hideNewCatForm();
+  }
+}
+
+addButton.addEventListener("click", handleClickNewCatForm);
+
+//modifica el evento para cumplir una función manejadora
 
 const btnAdd = document.querySelector(".js-btn-add");
-btnAdd.addEventListener("click", (event) => {
+
+function addNewKitten(event) {
   event.preventDefault();
 
   const valueDesc = inputDesc.value;
@@ -88,7 +104,8 @@ btnAdd.addEventListener("click", (event) => {
     "</p> </article> </li>";
 
   list.innerHTML = list.innerHTML + newCat;
-});
+}
+btnAdd.addEventListener("click", addNewKitten);
 
 // buscar por descripción
 
@@ -109,34 +126,4 @@ search.addEventListener("click", (event) => {
   if (kittenDesc3.includes(descrSearchText)) {
     list.innerHTML = kitten3;
   }
-  /*
-const kittenDesc1 = document.querySelector('.js_kittenDesc1');
-const kittenDesc2 = document.querySelector('.js_kittenDesc2');
-const kittenDesc3 = document.querySelector('.js_kittenDesc3');
-
-const kitten1 = document.querySelector('.js_kitten1');
-const kitten2 = document.querySelector('.js_kitten2');
-const kitten3 = document.querySelector('.js_kitten3');
-
-if ( kittenDesc1.innerHTML.includes(descrSearchText) ) {
-  //Completa el código para poner el <li> del gato 1 en la página
-  kitten1.classList.remove('hidden');
-  } else {
-    kitten1.classList.add('hidden');
-}
-  
-if (kittenDesc2.innerHTML.includes(descrSearchText) ) {
-//Completa el código para poner el <li> del gato 2 en la página
-  kitten2.classList.remove('hidden');
-  } else {
-  kitten2.classList.add('hidden');
-  }
-  
-  if( kittenDesc3.innerHTML.includes(descrSearchText) ) {
-  //Completa el código para poner el <li> del gato 3 en la página
-  kitten2.classList.remove('hidden');
-  } else {
-  kitten2.classList.add('hidden');
-}
-*/
 });
