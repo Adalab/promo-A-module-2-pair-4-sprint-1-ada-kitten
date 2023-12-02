@@ -29,38 +29,6 @@ const kittenDesc2 =
 const kittenDesc3 =
   "Tienen la cabeza cuadrada y los ojos simétricos, por lo que su bella mirada se ha convertido en una de sus señas de identidad. Sus ojos son grandes y las orejas resultan largas y en punta.";
 
-const kitten1 = `
-<li class="card js_kitten1">
-        <article>
-          <img class="card_img" src= '${kittenPhoto1}' alt="siames-cat" />
-          <h3 class="card_title">${kittenName1}</h3>
-          <h4 class="card_race">${kittenBreed1}</h4>
-          <p class="card_description js_kittenDesc1">
-          ${kittenDesc1}
-          </p>
-        </article>
-      </li>`;
-
-const kitten2 = `<li class="card js_kitten2">
-<img class="card_img" src= '${kittenPhoto2}' alt="sphynx-cat" />
-<h3 class="card_title">${kittenName2}</h3>
-<h4 class="card_race">${kittenBreed2}</h4>
-<p class="card_description js_kittenDesc2">
-  ${kittenDesc2}
-</p>
-</li>`;
-
-const kitten3 = `
-<li class="card js_kitten3">
-        <img class="card_img" src= '${kittenPhoto3}' alt="maine-coon-cat" />
-        <h3 class="card_title">${kittenName3}</h3>
-        <h4 class="card_race">${kittenBreed3}</h4>
-        <p class="card_description js_kittenDesc3">
-        ${kittenDesc3}
-        </p>
-`;
-
-list.innerHTML = kitten1 + kitten2 + kitten3;
 
 // Eventos
 
@@ -107,23 +75,48 @@ function addNewKitten(event) {
 }
 btnAdd.addEventListener("click", addNewKitten);
 
+
+// EVENTOS
+
+function renderKitten(url, desc, name, breed) {
+   return `<li class="card ">
+          <img class="card_img" src= ${url} alt="cat-photo" />
+          <h3 class="card_title">${name}</h3>
+          <h4 class="card_race">${breed}</h4>
+          <p class="card_description ">
+            ${desc}
+          </p>
+          </li>`;
+}
+
+
+const input_search_desc = document.querySelector(".js_in_search_desc");
+const descrSearchText = input_search_desc.value;
+
+const filterKitten = (event) => {
+    event.preventDefault();
+
+      if (kittenDesc1.includes(descrSearchText)) {
+        list.innerHTML += kitten1;
+      }
+      if (kittenDesc2.includes(descrSearchText)) {
+        list.innerHTML += kitten2;
+      }
+      if (kittenDesc3.includes(descrSearchText)) {
+        list.innerHTML += kitten3;
+      }
+};
+
 // buscar por descripción
 
-search.addEventListener("click", (event) => {
-  event.preventDefault();
+search.addEventListener("click", filterKitten);
 
-  const input_search_desc = document.querySelector(".js_in_search_desc");
-  const descrSearchText = input_search_desc.value;
 
-  if (kittenDesc1.includes(descrSearchText)) {
-    list.innerHTML = kitten1;
-  }
 
-  if (kittenDesc2.includes(descrSearchText)) {
-    list.innerHTML = kitten2;
-  }
+// CÓDIGO QUE SE EJECUTA AL CARGAR
 
-  if (kittenDesc3.includes(descrSearchText)) {
-    list.innerHTML = kitten3;
-  }
-});
+const kitten1 = renderKitten (kittenPhoto1, kittenDesc1, kittenName1, kittenBreed1);
+const kitten2 = renderKitten (kittenPhoto2, kittenDesc2, kittenName2, kittenBreed2);
+const kitten3 = renderKitten (kittenPhoto3, kittenDesc3, kittenName3, kittenBreed3);
+
+list.innerHTML = kitten1 + kitten2 + kitten3
